@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PredictFun Web App</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: black;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">Загрузка через прокси...</div>
+    
+    <!-- Используем бесплатный прокси-сервис -->
+    <iframe 
+        src="https://cors-anywhere.herokuapp.com/https://predict.fun"
+        onload="document.getElementById('loading').style.display='none';"
+        allow="camera; microphone; payment; autoplay"
+    ></iframe>
+    
+    <script>
+        // Если CORS блокирует, используем альтернативный прокси
+        function loadFallback() {
+            document.getElementById('loading').innerHTML = 'Пробуем альтернативный способ...';
+            
+            // Альтернативный iframe
+            const iframe = document.querySelector('iframe');
+            iframe.src = 'https://allorigins.win/raw?url=' + encodeURIComponent('https://predict.fun');
+            
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+            }, 5000);
+        }
+        
+        // Если основной не загрузится за 10 секунд
+        setTimeout(() => {
+            if (document.getElementById('loading').style.display !== 'none') {
+                loadFallback();
+            }
+        }, 10000);
+    </script>
+</body>
+</html>

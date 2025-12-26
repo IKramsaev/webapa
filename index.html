@@ -1,14 +1,103 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PredictFun Web App</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; }
-        iframe { width: 100%; height: 100%; border: none; }
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 500px;
+            padding: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #4cc9f0;
+        }
+        
+        .button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 15px;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        
+        .button:hover {
+            transform: scale(1.05);
+        }
+        
+        .info {
+            margin-top: 30px;
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+        
+        .option {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
-    <!-- Прямой iframe на predict.fun (для заграничного сервера) -->
-    <iframe src="https://predict.fun/?ref=telegram"></iframe>
+    <div class="container">
+        <h1>🎰 PredictFun Web App</h1>
+        <p>Выберите способ открытия:</p>
+        
+        <a href="proxy.html" class="button">🚀 Через прокси (рекомендуется для РФ)</a>
+        <a href="direct.html" class="button">🌍 Прямой доступ (с VPN)</a>
+        
+        <div class="info">
+            <h3>📌 Информация:</h3>
+            <div class="option">✅ <strong>Через прокси</strong> — обход блокировки в РФ</div>
+            <div class="option">✅ <strong>Прямой доступ</strong> — работает с VPN/за границей</div>
+            <div class="option">📱 <strong>Для Telegram:</strong> используйте proxy.html</div>
+        </div>
+        
+        <div style="margin-top: 30px; font-size: 12px; opacity: 0.7;">
+            URL для бота: https://ikramsaev.github.io/webapa/proxy.html
+        </div>
+    </div>
+    
+    <script>
+        // Автоматическое определение для Telegram Web App
+        if (window.Telegram && Telegram.WebApp) {
+            Telegram.WebApp.expand();
+            Telegram.WebApp.setHeaderColor('#1a1a2e');
+            Telegram.WebApp.setBackgroundColor('#16213e');
+            
+            // Автоматически перенаправляем на proxy.html в Web App
+            window.location.href = 'proxy.html';
+        }
+    </script>
 </body>
 </html>
